@@ -9,18 +9,19 @@ struct Aluno{
 	int id;
 	char nome[TAM];
 	int data[3]; //dia , mes e ano no formato dd/mm/aa
-	char cpf[11]; // cpf sem a presenÃ§a de pontuaÃ§Ã£o... apenas numeros
+	char cpf[11]; // cpf sem a presença de pontuação... apenas numeros
 	//xxx.xxx.xxx-xx
 	int situacao; // 1 -ativo   0 - inativo
 	
 };
 typedef struct Aluno aluno;
 
-// declarando as funÃ§Ãµes 
+// declarando as funções 
 
 void cadastrar(aluno a[],int pos);
 void print_aluno(aluno a[], int pos);
 void listar(aluno a[], int pos);
+void pesquisa(aluno a[], int pos);
 
 int main(){
 	
@@ -42,7 +43,7 @@ int main(){
 			listar(registros, pos);
 		}
 		else if(opc ==3){
-			
+			pesquisa(registros, pos);
 		}
 		else if(opc ==4){
 			
@@ -54,7 +55,7 @@ int main(){
 			logico = 0; // sai do programa
 		}
 		else{
-			printf("OperaÃ§Ã£o invalida");
+			printf("Operação invalida");
 			break;
 		}
 				
@@ -129,7 +130,24 @@ void listar(aluno a[], int pos){
 	}
 	
 }
-//verifica se o cpf Ã© ou nÃ£o Ã© um cpf
+//funcao que busca por um aluno especifico
+//////////////////////////////////////////
+void pesquisa(aluno a[], int pos){
+	char nome[50];
+	int i ;
+	printf("\nEntre com o nome do usuario: ");
+	fgets(nome, TAM , stdin);
+	gets(nome);
+	
+	for(i = 0 ; i<pos ; i++){
+		if(strcmp(nome,a[i].nome)==0){
+			print_aluno(a,i);
+		}
+	}
+	
+	
+}
+//verifica se o cpf é ou não é um cpf
 int iscpf(char cpf[]){
 	//retorna 1 se for um cpf e 0 caso nao seja
 	return 1;
