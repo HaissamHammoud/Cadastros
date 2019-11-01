@@ -23,6 +23,7 @@ void print_aluno(aluno a[], int pos);
 void listar(aluno a[], int pos);
 void pesquisa(aluno a[], int pos);
 void atualizar(aluno a[], int pos);
+int remover(aluno a[], int pos);
 /////////////////////////////////////////////
 
 int main(){
@@ -48,11 +49,11 @@ int main(){
 			pesquisa(registros, pos);
 		}
 		else if(opc ==4){
-				atualizar(registros, pos);
+			atualizar(registros, pos);
 
 		}
 		else if(opc ==5){
-
+			remover(registros, pos);
 		}
 		else if(opc ==6){
 			logico = 0; // sai do programa
@@ -161,5 +162,23 @@ void atualizar(aluno a[], int pos){
 	}
 	else{
 		printf("Conta inexestente...");
+	}
+}
+
+// Remove o cadastro Feito pelo aluno
+int remover(aluno a[], int pos){
+	int id;
+
+	printf("Entre com o id: ");
+	scanf("%d", &id);
+
+	printf("\n");
+	if(id < pos){
+		return a[id].situacao = 0;
+		printf("A conta de %s foi removida com sucesso \n\n", a[id].nome);
+	}
+	else{
+		printf("conta inexestente...\n\n");
+		return 1;
 	}
 }
