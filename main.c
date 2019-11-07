@@ -2,8 +2,9 @@
 #include<string.h>
 #include<stdlib.h>
 #include<conio.h>
-#define MAX 100
-#define TAM 50
+#define MAX 100 //quantidade maxima de alunos a ser cadastrado
+#define TAM 50 //tamanho maximo que um nome pode receber
+
 
 struct Aluno{
 	int id;
@@ -33,14 +34,20 @@ int main(){
 
 	while(logico){
 
-		printf("Cadastro de Pessoas\n1 - Cadastrar\n2 - Listar\n3 - Pesquisar\n4 - Atualizar \n5 - Remover \n6 - Sair\n");
+		printf("\nCadastro de Pessoas\n1 - Cadastrar\n2 - Listar\n3 - Pesquisar\n4 - Atualizar \n5 - Remover \n6 - Sair\n");
 
 
 		scanf("%d", &opc);
 		if(opc == 1){
+			if(pos <= MAX){
+			
 			cadastrar(registros, pos);
 			print_aluno(registros ,pos);
 		pos++;
+			}
+			else{
+				printf("\nTamanho maximo de cadastros atingido!!");
+			}
 		}
 		else if(opc ==2){
 			listar(registros, pos);
