@@ -2,9 +2,8 @@
 #include<string.h>
 #include<stdlib.h>
 #include<conio.h>
-#define MAX 100 //quantidade maxima de alunos a ser cadastrado
-#define TAM 50 //tamanho maximo que um nome pode receber
-
+#define MAX 100
+#define TAM 50
 
 struct Aluno{
 	int id;
@@ -34,39 +33,39 @@ int main(){
 
 	while(logico){
 
-		printf("\nCadastro de Pessoas\n1 - Cadastrar\n2 - Listar\n3 - Pesquisar\n4 - Atualizar \n5 - Remover \n6 - Sair\n");
+		printf("\nCadastro de Pessoas\n1 - Cadastrar\n2 - Listar\n3 - Pesquisar\n4 - Atualizar \n5 - Remover \n6 - Sair\n\n");
 
 
 		scanf("%d", &opc);
 		if(opc == 1){
-			if(pos <= MAX){
+			if(pos<= MAX){
 			
 			cadastrar(registros, pos);
 			print_aluno(registros ,pos);
 		pos++;
 			}
 			else{
-				printf("\nTamanho maximo de cadastros atingido!!");
+				printf("\nLimite de alunos cadastrados atingido!!");
 			}
 		}
 		else if(opc ==2){
-			listar(registros, pos);
+				listar(registros, pos);
 		}
 		else if(opc ==3){
-			pesquisa(registros, pos);
+				pesquisa(registros, pos);
 		}
 		else if(opc ==4){
-			atualizar(registros, pos);
+				atualizar(registros, pos);
 
 		}
 		else if(opc ==5){
-			remover(registros, pos);
+				remover(registros, pos);
 		}
 		else if(opc ==6){
 			logico = 0; // sai do programa
 		}
 		else{
-			printf("Operação invalida");
+			printf("Operação invalida\n");
 			break;
 		}
 	}
@@ -83,13 +82,13 @@ void cadastrar(aluno a[],int pos){
 	gets(a[pos].nome);
 	printf("\n%s", a[pos].nome);
 
-	printf("\nEntre com a data de nascimento:");
+	printf("\n\nEntre com a data de nascimento:");
 	printf("\nDia:");
 	scanf("%d", &a[pos].data[0]);
-	printf("%d", a[pos].data[0]);
+	//printf("%d", a[pos].data[0]);
 	printf("\nMes:");
 	scanf("%d", &a[pos].data[1]);
-	printf("\nAno: ");
+	printf("Ano: ");
 	scanf("%d", &a[pos].data[2]);
 
 
@@ -130,7 +129,8 @@ void listar(aluno a[], int pos){
 	int i  = 0;
 	for(i = 0 ; i<pos; i++){
 		if(a[i].situacao ==1 ){
-			printf("aluno: %s , id: %d\n", a[i].nome, a[i].id);
+
+			printf("  id: %4d  nome: %30s  cpf : %15s \n", a[i].id,a[i].nome, a[i].cpf);
 		}
 	}
 
@@ -138,15 +138,16 @@ void listar(aluno a[], int pos){
 
 //funcao que busca por um aluno especifico
 void pesquisa(aluno a[], int pos){
-	char nome[50];
-	int i ;
+		char nome[50];
+		int i ;
+
 	printf("\nEntre com o nome do usuario: ");
 	fgets(nome, TAM , stdin);
 	gets(nome);
 
 	for(i = 0 ; i<pos ; i++){
-		if(strcmp(nome,a[i].nome)==0){
-			print_aluno(a,i);
+		if(strcmp(nome,a[i].nome)==0 && a[i].situacao ==1){
+				print_aluno(a,i);
 		}
 	}
 }
@@ -154,35 +155,62 @@ void pesquisa(aluno a[], int pos){
 //verifica se o cpf é ou não é um cpf
 int iscpf(char cpf[]){
 	//retorna 1 se for um cpf e 0 caso nao seja
-	return 1;
-}
-
-//atualiza o cadastro feito pelo aluno
-void atualizar(aluno a[], int pos){
-	int id;
-
-	printf("entre com o id");
-	scanf("%d", &id);
-
-	if(id < pos){
-		cadastrar(a, id);
+	if(strlen(cpf) == 11 ){
+		return 1;
 	}
 	else{
-		printf("Conta inexestente...");
+	printf("\nCPF invalido , verifique se digitou o cpf corretamente\n");
+	return 0;
 	}
 }
 
-// Remove o cadastro Feito pelo aluno
+//atualiza o cadastro feito pelo aluno Ou reativar contas removidas
+void atualizar(aluno a[], int pos){
+		int id;
+		int Decisao;
+
+	printf("Entre com o id que desejas atualizar: ");
+	scanf("%d", &id);
+
+	if(id < pos && a[id].situacao ==1){
+		cadastrar(a, id);
+	}
+	// Verifica se a conta já estava removida
+	else if(id < pos && a[id].situacao == 0){
+		printf("Desejas Reativar essa conta?\n");
+		printf("(1) SIM \t (2) Nao\n");
+		scanf("%d", &Decisao);
+
+		switch(Decisao){
+
+			case 1:
+				printf("A conta de %s foi reativada com sucesso \n\n", a[id].nome);
+				a[id].situacao = 1;
+			break;
+
+			case 2:
+
+			break;
+
+			default:
+				printf("\nOpcao invalida");
+			break;
+		}
+	}
+	else{
+		printf("conta Inexistente");
+	}
+}
 int remover(aluno a[], int pos){
 	int id;
 
-	printf("Entre com o id: ");
+	printf("Entre com o id que desejas remover: ");
 	scanf("%d", &id);
 
 	printf("\n");
 	if(id < pos){
-		return a[id].situacao = 0;
 		printf("A conta de %s foi removida com sucesso \n\n", a[id].nome);
+		return a[id].situacao = 0;
 	}
 	else{
 		printf("conta inexestente...\n\n");
