@@ -9,14 +9,14 @@ struct Aluno{
 	int id;
 	char nome[TAM];
 	int data[3]; //dia , mes e ano no formato dd/mm/aa
-	char cpf[11]; // cpf sem a presença de pontuação... apenas numeros
+	char cpf[11]; // cpf sem a presenÃ§a de pontuaÃ§Ã£o... apenas numeros
 	//xxx.xxx.xxx-xx
 	int situacao; // 1 -ativo   0 - inativo
 
 };
 typedef struct Aluno aluno;
 
-// declarando as funções
+// declarando as funÃ§Ãµes
 
 void cadastrar(aluno a[],int pos);
 void print_aluno(aluno a[], int pos);
@@ -59,7 +59,7 @@ int main(){
 			logico = 0; // sai do programa
 		}
 		else{
-			printf("Operação invalida\n");
+			printf("OperaÃ§Ã£o invalida\n");
 			break;
 		}
 	}
@@ -145,7 +145,7 @@ void pesquisa(aluno a[], int pos){
 	}
 }
 
-//verifica se o cpf é ou não é um cpf
+//verifica se o cpf Ã© ou nÃ£o Ã© um cpf
 int iscpf(char cpf[]){
 	//retorna 1 se for um cpf e 0 caso nao seja
 	return 1;
@@ -162,7 +162,7 @@ void atualizar(aluno a[], int pos){
 	if(id < pos && a[id].situacao ==1){
 		cadastrar(a, id);
 	}
-	// Verifica se a conta já estava removida
+	// Verifica se a conta jÃ¡ estava removida
 	else if(id < pos && a[id].situacao == 0){
 		printf("Desejas Reativar essa conta?\n");
 		printf("(1) SIM \t (2) Nao\n");
