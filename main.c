@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-#include<conio.h>
+
 #define MAX 100
 #define TAM 50
 
@@ -119,7 +119,7 @@ void print_aluno(aluno a[], int pos){
 	printf("%d\n", a[pos].data[2]);
 
 	printf("CPF:%s\n\n", a[pos].cpf);
-	getch;
+	
 
 
 }
